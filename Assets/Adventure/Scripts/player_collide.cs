@@ -14,8 +14,12 @@ public class player_collide : MonoBehaviour
     bool have_key = false;
 
     public string farmer_dialogue;
+    public string farmer_dialogue2;
+    public string sheep_dialogue;
 
     public GameObject textObject;
+    public GameObject textObject2;
+    public GameObject sheepText;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +30,35 @@ public class player_collide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(t1.position, t2.position) < 50 && Input.GetKeyDown(KeyCode.Space))
+        if (Vector3.Distance(t1.position, t2.position) < 3  && Input.GetKeyDown(KeyCode.Space))
         {
             textObject.SetActive(true);
             speechUI.text = farmer_dialogue;
+        }
+        else if (Vector3.Distance(t1.position, t2.position) > 3)
+        {
+            textObject.SetActive(false);
+        }
+
+        if (Vector3.Distance(t1.position, t2.position) < 3 && have_key && Input.GetKeyDown(KeyCode.Space))
+        {
+            textObject2.SetActive(true);
+            speechUI.text = farmer_dialogue2;
+        }
+        else if (Vector3.Distance(t1.position, t2.position) > 3)
+        {
+            textObject2.SetActive(false);
+        }
+
+        //sheep dialogue
+        if (Vector3.Distance(t1.position, t3.position) < 3 && Input.GetKeyDown(KeyCode.Space))
+        {
+            sheepText.SetActive(true);
+            speechUI.text = sheep_dialogue;
+        }
+        else if (Vector3.Distance(t1.position, t3.position) > 3)
+        {
+            sheepText.SetActive(false);
         }
     }
 
