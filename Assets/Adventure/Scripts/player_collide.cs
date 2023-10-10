@@ -5,10 +5,16 @@ using TMPro;
 
 public class player_collide : MonoBehaviour
 {
-    bool have_key = false;
-    public string farmer_dialogue;
+    public Transform t1;
+    public Transform t2;
+    public Transform t3;
 
     public TMP_Text speechUI;
+    
+    bool have_key = false;
+
+    public string farmer_dialogue;
+
     public GameObject textObject;
 
     // Start is called before the first frame update
@@ -20,7 +26,11 @@ public class player_collide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Vector3.Distance(t1.position, t2.position) < 50 && Input.GetKeyDown(KeyCode.Space))
+        {
+            textObject.SetActive(true);
+            speechUI.text = farmer_dialogue;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -28,12 +38,6 @@ public class player_collide : MonoBehaviour
         if (collision.gameObject.name == "gate" && have_key)
         {
             Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.name == "farmer" && Input.GetKeyDown(KeyCode.Space))
-        {
-            text.Object.SetActive(true);
-            speechUI.text = farmer_dialogue;
         }
     }
 
@@ -47,11 +51,6 @@ public class player_collide : MonoBehaviour
             Destroy(collision.gameObject);
 
             have_key = true;
-        }
-
-        if (!collision.gameObject.name == "farmer" && textObject.Object.activeSelf == true)
-        {
-            textObject.SetActive(false);
         }
     }
 }
