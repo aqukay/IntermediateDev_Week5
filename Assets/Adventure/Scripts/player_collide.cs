@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class player_collide : MonoBehaviour
 {
@@ -80,6 +81,11 @@ public class player_collide : MonoBehaviour
             Destroy(collision.gameObject);
 
             have_key = true;
+        }
+
+        if (collision.gameObject.name == "exit")
+        {
+            SceneManager.LoadScene("Title");
         }
     }
 }
