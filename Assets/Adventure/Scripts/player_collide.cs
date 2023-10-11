@@ -22,6 +22,12 @@ public class player_collide : MonoBehaviour
     public GameObject textObject2;
     public GameObject sheepText;
 
+    public AudioSource audio;
+    public AudioClip grass;
+    public AudioClip Beep;
+    public AudioClip Beep2;
+    public AudioClip Gate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +41,8 @@ public class player_collide : MonoBehaviour
         {
             textObject.SetActive(true);
             speechUI.text = farmer_dialogue;
+
+            audio.PlayOneShot(Beep);
         }
         else if (Vector3.Distance(t1.position, t2.position) > 3)
         {
@@ -45,6 +53,8 @@ public class player_collide : MonoBehaviour
         {
             textObject2.SetActive(true);
             speechUI.text = farmer_dialogue2;
+
+            audio.PlayOneShot(Beep);
         }
         else if (Vector3.Distance(t1.position, t2.position) > 3)
         {
@@ -56,6 +66,8 @@ public class player_collide : MonoBehaviour
         {
             sheepText.SetActive(true);
             speechUI.text = sheep_dialogue;
+
+            audio.PlayOneShot(Beep2);
         }
         else if (Vector3.Distance(t1.position, t3.position) > 3)
         {
@@ -68,6 +80,7 @@ public class player_collide : MonoBehaviour
         if (collision.gameObject.name == "gate" && have_key)
         {
             Destroy(collision.gameObject);
+            audio.PlayOneShot(Gate);
         }
     }
 
@@ -79,11 +92,12 @@ public class player_collide : MonoBehaviour
         if (collision.gameObject.name == "green grass")
         {
             Destroy(collision.gameObject);
+            audio.PlayOneShot(grass);
 
             have_key = true;
         }
 
-        if (collision.gameObject.name == "exit")
+        if (collision.gameObject.name == "Exit")
         {
             SceneManager.LoadScene("Title");
         }
